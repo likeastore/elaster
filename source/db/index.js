@@ -5,10 +5,5 @@ module.exports = function (config) {
 		return c.name;
 	});
 
-	var db = mongo.connect(config.mongo, collections);
-	if (!db) {
-		throw new Error('could not connect to ' + config.mongo);
-	}
-
-	return db;
+	return mongo.connect(config.mongo.connection, collections);
 };
