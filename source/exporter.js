@@ -39,12 +39,17 @@ function exportCollection(desc, callback) {
 				next(err);
 			});
 		},
-		// function (next) {
-		// 	console.log('----> initialize index mapping');
-		// 	elastic.indices.putMapping({index: desc.index}, function (err) {
-		// 		next(err);
-		// 	});
-		// },
+		function (next) {
+			console.log('----> initialize index mapping');
+
+			if (!desc.mappings) {
+				return next();
+			}
+
+			elastic.indices.putMapping({index: desc.index, type: desc.type, body: desc.mappings }, function (err) {
+				next(err);
+			});
+		},
 		function (next) {
 			console.log('----> analizing collection [' + desc.name + ']');
 			collection.count(function (err, count) {
@@ -74,7 +79,7 @@ function exportCollection(desc, callback) {
 
 				elastic.create({
 					index: desc.index,
-					type: desc.index,
+					type: desc.type,
 					id: item._id.toString(),
 					body: item
 				}, function (err) {
