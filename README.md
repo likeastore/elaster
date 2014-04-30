@@ -1,13 +1,14 @@
 # Elaster
 
-MongoDB to Elastic Search exporter.
+MongoDB collection to Elastic Search index exporter.
 
 ## Usage
 
 Clone the repo,
 
 ```bash
-[clone the repo]
+$ git clone https://github.com/likeastore/elaster
+$ cd elaster
 ```
 
 Edit config file `/config/index.js`,
