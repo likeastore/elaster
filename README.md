@@ -23,33 +23,31 @@ module.exports = {
 		connection: 'http://localhost:9200'
 	},
 
-	export: {
-		// export configuration
+	collections: {
+		// collections to export
 	}
 };
 
 ```
 
-In `export` configuration section you can setup which collections to export, which mappings to use, e.g.,
+In `collections` configuration section you can setup which collections to export, which mappings to use, e.g.,
 
 ```js
-	export: {
-		collections: [{
-				name: 'items',
-				index: 'items',
-				type: 'item'
-				fields: ['_id', 'title', 'description', 'user', 'date'],
-				mapping: {
-					// Elastic Seach mapping
-				}
-			}, {
-				name: 'users',
-				index: 'users',
-				type: 'user'
-				fields: ['_id', 'email', 'created', 'bio', 'address']
-			}
-		]
+collections: [{
+		name: 'items',
+		index: 'items',
+		type: 'item'
+		fields: ['_id', 'title', 'description', 'user', 'date'],
+		mapping: {
+			// Elastic Seach mapping
+		}
+	}, {
+		name: 'users',
+		index: 'users',
+		type: 'user'
+		fields: ['_id', 'email', 'created', 'bio', 'address']
 	}
+]
 ```
 
 The `mapping` is optional field, if it's missing when Elastic Seach default mapping is used.
