@@ -10,6 +10,7 @@ module.exports = {
 	collections: [ {
 		name: 'items',
 		index: 'items',
+		type: 'item',
 		fields: ['_id', 'authorName', 'created', 'date', 'description', 'source', 'type', 'user']
 	}]
 };

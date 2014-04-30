@@ -1,5 +1,4 @@
 var _ = require('underscore');
-var request = require('request');
 var async = require('async');
 var config = require('../config');
 
@@ -35,6 +34,18 @@ function exportCollection(desc, callback) {
 			});
 		},
 		function (next) {
+			console.log('----> creating new index [' + desc.index + ']');
+			elastic.indices.create({index: desc.index}, function (err) {
+				next(err);
+			});
+		},
+		// function (next) {
+		// 	console.log('----> initialize index mapping');
+		// 	elastic.indices.putMapping({index: desc.index}, function (err) {
+		// 		next(err);
+		// 	});
+		// },
+		function (next) {
 			console.log('----> analizing collection [' + desc.name + ']');
 			collection.count(function (err, count) {
 				if (err) {
@@ -56,12 +67,31 @@ function exportCollection(desc, callback) {
 				this.queue(item);
 			});
 
-			//var postToElastic = request.post(config.elastic + '/a');
+			var postToElastic = through(function (item) {
+				var me = this;
+
+				me.pause();
+
+				elastic.create({
+					index: desc.index,
+					type: desc.index,
+					id: item._id.toString(),
+					body: item
+				}, function (err) {
+					if (err) {
+						console.error(('failed to create document in elastic.').bold.red);
+						console.error(err);
+					}
+
+					me.queue(item);
+					me.resume();
+				});
+			});
 
 			var progress = function () {
 				var count = 0;
 				return through(function () {
-					single(('------> processed ' + (count++) + ' documents').magenta);
+					single(('------> processed ' + (++count) + ' documents').magenta);
 				});
 			};
 
@@ -69,11 +99,13 @@ function exportCollection(desc, callback) {
 				.find({})
 				.sort({_id: 1})
 				.pipe(takeFields)
-//				.pipe(postToElastic)
+				.pipe(postToElastic)
 				.pipe(progress());
 
-			stream.on('end', next);
-		}
+			stream.on('end', function (err) {
+				next(err, count);
+			});
+		},
 	], function (err) {
 		if (err) {
 			console.error(('====> collection [' + desc.name + '] - failed to export.\n').bold.red);
@@ -87,6 +119,14 @@ function exportCollection(desc, callback) {
 	});
 }
 
+function close() {
+	async.each([db, elastic], _close);
+
+	function _close(conn, callback) {
+		conn.close(callback);
+	}
+}
+
 function exporter(collections) {
 	var exports = collections.map(function (c) {
 		return function (callback) {
@@ -94,13 +134,7 @@ function exporter(collections) {
 		};
 	});
 
-	async.series(exports, function () {
-		async.each([db, elastic], _close);
-
-		function _close(conn, callback) {
-			conn.close(callback);
-		}
-	});
+	async.series(exports, close);
 }
 
 module.exports = {

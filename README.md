@@ -36,6 +36,7 @@ In `export` configuration section you can setup which collections to export, whi
 		collections: [{
 				name: 'items',
 				index: 'items',
+				type: 'item'
 				fields: ['_id', 'title', 'description', 'user', 'date'],
 				mapping: {
 					// Elastic Seach mapping
@@ -43,6 +44,7 @@ In `export` configuration section you can setup which collections to export, whi
 			}, {
 				name: 'users',
 				index: 'users',
+				type: 'user'
 				fields: ['_id', 'email', 'created', 'bio', 'address']
 			}
 		]
@@ -54,7 +56,7 @@ The `mapping` is optional field, if it's missing when Elastic Seach default mapp
 Once, config file is updated run exporter,
 
 ```bash
-$ npm run
+$ node source/elaster
 ```
 
 ## Licence (MIT)
