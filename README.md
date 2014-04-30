@@ -34,14 +34,14 @@ In `export` configuration section you can setup which collections to export, whi
 ```js
 	export: {
 		collections: [{
-				collection: 'items',
+				name: 'items',
 				index: 'items',
 				fields: ['_id', 'title', 'description', 'user', 'date'],
 				mapping: {
 					// Elastic Seach mapping
 				}
 			}, {
-				collection: 'users',
+				name: 'users',
 				index: 'users',
 				fields: ['_id', 'email', 'created', 'bio', 'address']
 			}
