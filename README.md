@@ -55,7 +55,7 @@ The `mapping` is optional field, if it's missing when Elastic Seach default mapp
 Once, config file is updated run exporter,
 
 ```bash
-$ node source/elaster
+$ bin/elaster
 ```
 
 ## Licence (MIT)

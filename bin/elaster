@@ -1,0 +1,5 @@
+#!/usr/bin/env node
+var elaster = require('../source/elaster');
+var config = require('../config');
+
+elaster.run(config.collections);
