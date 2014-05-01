@@ -1,4 +1,5 @@
 var _ = require('underscore');
+var moment = require('moment');
 var async = require('async');
 var config = require('../config');
 
@@ -10,6 +11,10 @@ var single = require('single-line-log');
 
 require('colors');
 
+function format(duration) {
+	return duration.hours() + ':' + duration.minutes() + ':' + duration.seconds() + ':' + duration.milliseconds();
+}
+
 function exportCollection(desc, callback) {
 	var collection = db[desc.name];
 
@@ -18,6 +23,8 @@ function exportCollection(desc, callback) {
 	}
 
 	console.log(('====> exporting collection [' + desc.name + ']').bold.white);
+
+	var started = moment();
 
 	async.waterfall([
 		function (next) {
@@ -118,7 +125,10 @@ function exportCollection(desc, callback) {
 			return callback(err);
 		}
 
-		console.log(('====> collection [' + desc.name + '] - exported successfully.\n').bold.green);
+		var duration = moment.duration(moment().diff(started));
+
+		console.log(('====> collection [' + desc.name + '] - exported successfully.').green);
+		console.log(('====> time elapsed ' + format(duration) + '\n').green);
 
 		callback(null);
 	});
