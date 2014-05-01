@@ -58,6 +58,10 @@ Once, config file is updated run exporter,
 $ bin/elaster
 ```
 
+Output,
+
+[![](https://lh6.googleusercontent.com/--if-zsLG3uk/U2Ihtad8p4I/AAAAAAAAcRA/pg4xpTrcmGg/w2236-h800-no/Screenshot+2014-05-01+13.23.26.png)](https://github.com/likeastore/elaster)
+
 ## Licence (MIT)
 
 Copyright (c) 2014, Likeastore.com info@likeastore.com
