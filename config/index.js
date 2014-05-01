@@ -1,6 +1,6 @@
 module.exports = {
 	mongo: {
-		connection: 'mongodb://localhost:27017/likeastoredb'
+		connection: 'mongodb://localhost:27017/likeastoreproddb'
 	},
 
 	elastic: {

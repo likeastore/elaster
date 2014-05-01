@@ -92,7 +92,7 @@ function exportCollection(desc, callback) {
 				}, function (err) {
 					if (err) {
 						console.error(('failed to create document in elastic.').bold.red);
-						console.error(err);
+						return next(err);
 					}
 
 					me.queue(item);
