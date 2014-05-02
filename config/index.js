@@ -17,6 +17,15 @@ module.exports = {
 					'authorName': {
 						'type': 'string'
 					},
+					'itemId': {
+						'type': 'string',
+						'index': 'not_analyzed'
+					},
+					'idInt': {
+						'type': 'object',
+						'store': 'false',
+						'index': 'not_analyzed'
+					},
 					'created': {
 						'type': 'date',
 						'format': 'dateOptionalTime'
