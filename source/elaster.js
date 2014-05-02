@@ -59,16 +59,16 @@ function exportCollection(desc, callback) {
 		},
 		function (next) {
 			console.log('----> analizing collection [' + desc.name + ']');
-			collection.count(function (err, count) {
+			collection.count(function (err, total) {
 				if (err) {
 					return next(err);
 				}
 
-				console.log('----> find ' + count + ' documentents to export');
-				next(null, count);
+				console.log('----> find ' + total + ' documentents to export');
+				next(null, total);
 			});
 		},
-		function (count, next) {
+		function (total, next) {
 			console.log('----> streaming collection to elastic');
 
 			var takeFields = through(function (item) {
@@ -103,7 +103,8 @@ function exportCollection(desc, callback) {
 			var progress = function () {
 				var count = 0;
 				return through(function () {
-					single(('------> processed ' + (++count) + ' documents').magenta);
+					var percentage = Math.floor(100 * ++count / total);
+					single(('------> processed ' + count + ' documents [' + percentage + '%]').magenta);
 				});
 			};
 
@@ -115,7 +116,7 @@ function exportCollection(desc, callback) {
 				.pipe(progress());
 
 			stream.on('end', function (err) {
-				next(err, count);
+				next(err, total);
 			});
 		},
 	], function (err) {
