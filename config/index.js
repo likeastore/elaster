@@ -22,7 +22,7 @@ module.exports = {
 						'index': 'not_analyzed'
 					},
 					'idInt': {
-						'type': 'object',
+						'type': 'string',
 						'store': 'false',
 						'index': 'not_analyzed'
 					},
