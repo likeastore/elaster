@@ -1,6 +1,6 @@
 module.exports = {
 	mongo: {
-		connection: 'mongodb://localhost:27017/likeastoreproddb'
+		connection: 'mongodb://localhost:27017/likeastoredb'
 	},
 
 	elastic: {
@@ -11,7 +11,6 @@ module.exports = {
 		name: 'items',
 		index: 'items',
 		type: 'item',
-		fields: ['_id', 'authorName', 'created', 'date', 'description', 'source', 'type', 'user'],
 		mappings: {
 			'item': {
 				'properties': {
@@ -31,13 +30,18 @@ module.exports = {
 					},
 					'source': {
 						'type': 'string',
-						'index': 'not_analyzed'
 					},
 					'type': {
-						'type': 'string'
+						'type': 'string',
+						'index': 'not_analyzed'
 					},
 					'user': {
-						'type': 'string'
+						'type': 'string',
+						'index': 'not_analyzed'
+					},
+					'userData': {
+						'type': 'object',
+						'index': 'not_analyzed'
 					}
 				}
 			}
