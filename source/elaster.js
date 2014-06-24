@@ -17,6 +17,7 @@ function format(duration) {
 
 function exportCollection(desc, callback) {
 	var collection = db[desc.name];
+	var query = desc.query || {};
 
 	if (!collection) {
 		return callback('collection ' + desc.name + ' does not exist.');
@@ -59,7 +60,7 @@ function exportCollection(desc, callback) {
 		},
 		function (next) {
 			console.log('----> analizing collection [' + desc.name + ']');
-			collection.count(function (err, total) {
+			collection.count(query, function (err, total) {
 				if (err) {
 					return next(err);
 				}
@@ -109,7 +110,7 @@ function exportCollection(desc, callback) {
 			};
 
 			var stream = collection
-				.find({})
+				.find(query)
 				.sort({_id: 1})
 				.pipe(takeFields)
 				.pipe(postToElastic)
