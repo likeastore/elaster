@@ -1,21 +1,13 @@
 module.exports = {
 	mongo: {
-		connection: 'mongodb://likeastore:2758d3726ddab88b951b77b17343c9fe6672bbfe@christian.mongohq.com:10093/likeastoreproddb'
+		connection: 'http://localhost:27017'
 	},
 
 	elastic: {
 		host: {
-			protocol: 'https',
-			host: 'search.likeastore.com',
-			port: 443,
-			query: {
-				access_token: '63882eb552185b755a954c9c3c9deba282b20588'
-			}
 		},
 
-		requestTimeout: 5000,
-
-		rejectUnauthorized: false
+		requestTimeout: 5000
 	},
 
 	collections: [ {
