@@ -4,14 +4,17 @@ module.exports = {
 	},
 
 	elastic: {
-		connection: 'http://localhost:9200'
+		host: {
+			host: 'http://localhost:9200'
+		},
+
+		requestTimeout: 5000
 	},
 
 	collections: [ {
 		name: 'items',
 		index: 'items',
 		type: 'item',
-		query: {user: 'alexander.beletsky@gmail.com'},
 		mappings: {
 			'item': {
 				'properties': {
