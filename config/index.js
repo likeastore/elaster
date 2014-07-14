@@ -5,14 +5,17 @@ module.exports = {
 
 	elastic: {
 		host: {
-			host: 'https://search.likeastore.com',
-			port: 80,
+			protocol: 'https',
+			host: 'search.likeastore.com',
+			port: 443,
 			query: {
 				access_token: '63882eb552185b755a954c9c3c9deba282b20588'
 			}
 		},
 
-		requestTimeout: 5000
+		requestTimeout: 5000,
+
+		rejectUnauthorized: false
 	},
 
 	collections: [ {
