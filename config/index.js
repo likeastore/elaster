@@ -22,7 +22,6 @@ module.exports = {
 		name: 'items',
 		index: 'items',
 		type: 'item',
-		query: {user: 'alexander.beletsky@gmail.com'},
 		mappings: {
 			'item': {
 				'properties': {
