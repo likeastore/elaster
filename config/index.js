@@ -1,11 +1,15 @@
 module.exports = {
 	mongo: {
-		connection: 'mongodb://localhost:27017/likeastoreproddb'
+		connection: 'mongodb://likeastore:2758d3726ddab88b951b77b17343c9fe6672bbfe@christian.mongohq.com:10093/likeastoreproddb'
 	},
 
 	elastic: {
 		host: {
-			host: 'http://localhost:9200'
+			host: 'https://search.likeastore.com',
+			port: 80,
+			query: {
+				access_token: '63882eb552185b755a954c9c3c9deba282b20588'
+			}
 		},
 
 		requestTimeout: 5000
@@ -15,6 +19,7 @@ module.exports = {
 		name: 'items',
 		index: 'items',
 		type: 'item',
+		query: {user: 'alexander.beletsky@gmail.com'},
 		mappings: {
 			'item': {
 				'properties': {
