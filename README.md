@@ -11,7 +11,7 @@ $ git clone https://github.com/likeastore/elaster
 $ cd elaster
 ```
 
-Edit config file `/config/index.js`,
+Edit config file `config/index.js`,
 
 ```js
 module.exports = {
