@@ -1,6 +1,6 @@
 module.exports = {
 	mongo: {
-		connection: 'http://localhost:27017'
+		connection: 'mongodb://localhost:27017/likeastoreproddb'
 	},
 
 	elastic: {
@@ -43,6 +43,7 @@ module.exports = {
 	{
 		name: 'items',
 		index: 'items',
+		query: {user: 'alexander.beletsky@gmail.com'},
 		type: 'item',
 		mappings: {
 			'item': {
@@ -89,5 +90,4 @@ module.exports = {
 			}
 		}
 	}]
-};
 };
