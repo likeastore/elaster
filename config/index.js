@@ -11,6 +11,36 @@ module.exports = {
 	},
 
 	collections: [ {
+		name: 'collections',
+		index: 'collections',
+		type: 'collection',
+		fields: ['_id', 'public', 'title', 'description', 'user', 'userData'],
+		mappings: {
+			'collection': {
+				'properties': {
+					'public': {
+						'type': 'boolean',
+						'index': 'not_analyzed'
+					},
+					'title': {
+						'type': 'string'
+					},
+					'description': {
+						'type': 'string'
+					},
+					'user': {
+						'type': 'string',
+						'index': 'not_analyzed'
+					},
+					'userData': {
+						'type': 'object',
+						'index': 'not_analyzed'
+					}
+				}
+			}
+		}
+	},
+	{
 		name: 'items',
 		index: 'items',
 		type: 'item',
@@ -59,4 +89,5 @@ module.exports = {
 			}
 		}
 	}]
+};
 };
